@@ -1,0 +1,6 @@
+.phpintel
+.vagrant/
+.git/
+.DS_Store
+.htaccess
+/vendor

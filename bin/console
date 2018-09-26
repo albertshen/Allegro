@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+use App\Kernel;
+use Allegro\Console\Application;
+use Allegro\Console\Input;
+
+set_time_limit(0);
+
+require __DIR__.'/../vendor/autoload.php';
+
+$env = 'dev';
+$debug = 0;
+$input = new Input();
+
+$kernel = new Kernel($env, $debug);
+$application = new Application($kernel);
+$application->run($input);
