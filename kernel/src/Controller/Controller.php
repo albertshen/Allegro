@@ -31,7 +31,7 @@ class Controller
     {
 		return $this->request;
     }
-    
+
     public function statusPrint($status, $msg = '') 
     {
         $data = array();
@@ -51,7 +51,7 @@ class Controller
 
 	public function redirect($uri) 
 	{
-		$this->Response()->redirect($uri);
+		$this->response->redirect($uri);
 	}
 
     public function setContainer(ContainerInterface $container = null)
@@ -63,8 +63,7 @@ class Controller
 	{
 		$template = new Theme();
 		$data = $template->theme($tpl_name, $params);
-		$response = new Response($data);
-		return $response;
+		return $this->response->setContent($data);
 		// $response->send();
 	}
 

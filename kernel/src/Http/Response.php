@@ -28,11 +28,11 @@ class Response
         return $this;
     }
 
-    public function getContent()
+    public function getContent($content)
     {
         return $this->content;
     }
-
+    
     /**
      * Sends content for the current web response.
      *
