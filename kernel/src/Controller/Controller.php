@@ -27,6 +27,11 @@ class Controller
 		return $this->container->get($id);
 	}
 
+	public function getParameter($name)
+	{
+		return $this->container->getParameter($name);
+	}
+
     public function getRequest()
     {
 		return $this->request;
@@ -59,11 +64,12 @@ class Controller
         $this->container = $container;
     }
 
-	public function render($tpl_name, $params = array()) 
+	public function render($tpl_name, $params = array())
 	{
-		$template = new Theme();
-		$data = $template->theme($tpl_name, $params);
-		return $this->response->setContent($data);
+		return $this->get('template')->render($tpl_name, $params);
+		// $template = new Theme();
+		// $data = $template->theme($tpl_name, $params);
+		// return $this->response->setContent($data);
 		// $response->send();
 	}
 

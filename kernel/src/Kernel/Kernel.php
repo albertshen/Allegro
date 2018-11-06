@@ -15,6 +15,13 @@ abstract class Kernel implements KernelInterface, TerminableInterface
 
 	private $booted;
 
+    private $environment;
+
+    public function __construct($environment, $debug)
+    {
+        $this->environment = $environment;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +35,12 @@ abstract class Kernel implements KernelInterface, TerminableInterface
     public function getHttpKernel()
     {
     	return $this->container->get('http_kernel');
+    }
+
+
+    public function getEnvironment()
+    {
+        return $this->environment;
     }
 
 	public function boot()
@@ -92,6 +105,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
             'kernel.project_dir' => $this->getProjectDir(),
             'kernel.cache_dir' => $this->getCacheDir(),
             'kernel.logs_dir' => $this->getLogDir(),
+            'kernel.environment' => $this->environment,
         );
     }
 
@@ -99,7 +113,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
 	{
 		$container = new ContainerBuilder();
         $container->set('container', $container);
-        //$container->addParameters($this->getKernelParameters());
+        $container->addParameters($this->getKernelParameters());
         $container->addParameters($this->getConfig());
         $container->addParameters($this->getRoutes());
 

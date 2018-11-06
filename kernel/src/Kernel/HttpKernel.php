@@ -21,6 +21,8 @@ class HttpKernel implements TerminableInterface
 
 	private $resolver;
 
+	private $request;
+
     public function __construct(EventDispatcher $dispatcher, ControllerResolver $resolver)
     {
         $this->dispatcher = $dispatcher;
@@ -30,10 +32,16 @@ class HttpKernel implements TerminableInterface
 	public function handle(Request $request)
 	{
 		try{
+			$this->request = $request;
 			return $this->handleRaw($request);
 		} catch (\Exception $e) {
 			return new Response($e->getMessage());
 		}
+	}
+
+	public function getRequest()
+	{
+		return $this->request;
 	}
 
 	public function handleRaw(Request $request)
@@ -60,7 +68,6 @@ class HttpKernel implements TerminableInterface
 
 		return $response;
 	}
-
 
     /**
      * {@inheritdoc}

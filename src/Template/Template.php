@@ -2,6 +2,8 @@
 
 namespace App\Template;
 
+use Allegro\Http\Response;
+
 class Template
 {
 	private $basePath;
@@ -18,6 +20,8 @@ class Template
 		include_once($this->basePath.$template.'.tpl.php');
 		$string = ob_get_contents();
 		ob_end_clean();
-		return $string;
+		$response = new Response();
+		$response->setContent($string);
+		return $response;
 	}
 }

@@ -8,7 +8,10 @@ namespace Allegro\EventDispatcher;
  * {@link getSubscribedEvents} and registers the subscriber as a listener for all
  * returned events.
  *
- * @author Albert Shen <albertshen1206@gmail.com>
+ * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
+ * @author Jonathan Wage <jonwage@gmail.com>
+ * @author Roman Borschel <roman@code-factory.org>
+ * @author Bernhard Schussek <bschussek@gmail.com>
  */
 interface EventSubscriberInterface
 {

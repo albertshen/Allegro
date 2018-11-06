@@ -76,6 +76,14 @@ class Request
 		return $_SERVER['REQUEST_URI'];
 	}
 
+	public function getHttpReferer()
+	{
+		if (!empty($_SERVER['HTTP_REFERER'])) {
+			return $_SERVER['HTTP_REFERER'];
+		}
+		return null;
+	}
+
 	public function getDomain() {
 		$domain = $_SERVER['HTTP_HOST'];
 		$port = strpos($domain, ':');
@@ -135,22 +143,16 @@ class Request
 		$this->validation = $data;
 	}
 
-	public function setSourceUrl($url, $type = 'cookie') {
-		if($type == 'cookie') {
-			setcookie("redirect_url", $url, time() + 3600*8, '/');
+	public function generateUrl($router, $query = array(), $absolute = false){
+		if($query) {
+			$url = $router . '?' .http_build_query($query);
+		} else {
+			$url = $router;
 		}
-	}
-
-	public function getSourcetUrl($type = 'cookie') {
-		if (ENV == 'dev') {
-			return '/';
+		if($absolute) {
+			$base_url = 'http://' . $_SERVER['HTTP_HOST'];
+			return $url = $base_url  . '/' . $url;
 		}
-		
-		if($type == 'cookie') {
-			if(isset($_COOKIE['redirect_url'])) {
-				return $_COOKIE['redirect_url'];
-			} 
-		}
-		return null;
+		return $url;
 	}
 }

@@ -7,7 +7,7 @@ namespace Allegro\EventDispatcher;
  * Listeners are registered on the manager and events are dispatched through the
  * manager.
  *
- * @author Albert Shen <albertshen1206@gmail.com>
+ * @author Bernhard Schussek <bschussek@gmail.com>
  */
 interface EventDispatcherInterface
 {
